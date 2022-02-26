@@ -1,0 +1,30 @@
+body {
+    margin-top: 4rem;
+    background-color: rgb(66, 186, 250);
+}
+h1 {
+	text-align: center;
+}
+
+.main-content {
+	margin: auto;
+	box-sizing: border-box;
+	display: flex;
+	width: 500px;
+	flex-direction: column;
+	justify-content: center;
+    border-radius: 4px;
+	align-items: center;
+    border: 5px solid black;
+}
+.main-content textarea{
+    resize: vertical;
+}
+.main-content div{
+    margin-top: 10px;
+}
+
+.main-content div *{
+    display: block;
+}
+
