@@ -1,0 +1,31 @@
+body{
+
+}
+
+.account-links{
+    display: flex;
+    justify-content: end;
+}
+
+.account-links a{
+    font-size: 25px;
+    margin-right: 10px;
+    text-decoration: none;
+    /* color: white; */
+}
+
+.main-content{
+
+}
+
+#header{
+
+}
+
+#subheader{
+
+}
+
+.main-buttons{
+
+}
