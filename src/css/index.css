@@ -1,31 +1,67 @@
-body{
-
+body {
+	margin: 0;
+	/* background-image: url("../assets/indexbg.jpg");
+    background-size: cover; */
 }
 
-.account-links{
-    display: flex;
-    justify-content: end;
+.account-links {
+	display: flex;
+	justify-content: end;
 }
 
-.account-links a{
+.login-link {
+	font-size: 25px;
+	margin-top: 10px;
+	margin-right: 10px;
+	text-decoration: none;
+	color: white;
+	transition: color 0.25s;
+}
+
+.login-link:hover {
+	color: rgb(66, 186, 250);
+}
+
+.bg-img {
+	position: absolute;
+	z-index: -1;
+	width: 100vw;
+	height: 100vh;
+}
+.main-content {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#header {
+    margin-top: -25px;
+	color: rgb(12, 197, 12);
+    font-size: 60px;
+}
+
+#subheader {
+	margin-top: -15px;
     font-size: 25px;
-    margin-right: 10px;
-    text-decoration: none;
-    /* color: white; */
+	color: white;
 }
 
-.main-content{
-
+.main-buttons {
+	width: inherit;
+	display: flex;
+	justify-content: space-between;
 }
-
-#header{
-
-}
-
-#subheader{
-
-}
-
-.main-buttons{
-
+.main-buttons a {
+    box-sizing: border-box;
+    color: white;
+    height: 40px;
+    width: 100px;
+    text-align: center;
+    margin: 0px 40px;
+	text-decoration: none;
+    border-radius: 25px;
+    background-color:rgb(66, 186, 250);
+	padding: 10px;
 }
