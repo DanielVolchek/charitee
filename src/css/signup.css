@@ -1,0 +1,73 @@
+body {
+    overflow: hidden;
+}
+
+p {
+    margin: auto;
+}
+
+
+.signup {
+    display: flex;
+    position: absolute;
+    height: 5vh;
+    width: 15vw;
+    background-color: white;
+    border: 1px solid grey;
+    left: 18vw;
+    top: 12.5vh;
+    font-size: larger;
+}
+
+.form {
+    height: 70vh;
+    width: 85vw;
+    display: flex;
+    flex-direction: column;
+    margin: 15vh auto;
+    background-color: #0096c7;
+}
+
+#email {
+    margin: 1vh auto 1vh auto;
+    height: 6vh;
+    width: 25vw;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#password {
+    margin: 1vh auto 1vh auto;
+    height: 6vh;
+    width: 25vw;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#confirm-password {
+    margin: 1vh auto 5vh auto;
+    height: 6vh;
+    width: 25vw;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#username {
+    margin: 16vh auto 1vh auto;
+    height: 6vh;
+    width: 25vw;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#submit {
+    margin: auto;
+    height: 5vh;
+    width: 7vw;
+    border-radius: 10px;
+    background-color: white;
+}
