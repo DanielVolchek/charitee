@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/donatepage.css">
+    <script src="../scripts/donatepage.js" defer></script>
     <title>Document</title>
 </head>
+
 <body>
-    
+    <h1>Donate your clothes for a good cause</h1>
+    <div class="main-content">
+        <form id="signup-form">
+            <div>
+                <label for="images">Upload Images</label>
+                <input type="file" id="images" multiple> 
+            </div>
+            <div>
+                <label for="desc">Enter Desc</label>
+                <textarea id="desc" rows="2" required></textarea>
+            </div>
+            <div>
+                <label for="tags">Enter single word search tags</label>
+                <textarea id="tags" rows="2" required></textarea>
+            </div>
+            <div>
+                <label for="charity">Choose the charity you want to support</label>
+                <select id="charity" required>
+                    <option value="dummy">--Select Charity--</option>
+                    <option value="second">--Select Charity--</option>
+                </select>
+            </div>
+        </form>
+            <button id="submit" type="submit" form="signup-form">Submit</button>
+    </div>
 </body>
+
 </html>
