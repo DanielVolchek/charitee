@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
-import { getDatabase, set, ref } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js';
+import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
+import { getDatabase, update, ref } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -21,63 +21,42 @@ const auth = getAuth();
 const database = getDatabase();
 
 
-const handleSignup = () => {
-    const username = document.getElementById("username").value;
+const handleSignin = () => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
 
     // Checks if any fields are missing values
-    if (!validateInputField(username) || !validateInputField(email)
-        || !validateInputField(password) || !validateInputField(confirmPassword)) {
+    if (!validateInputField(email) || !validateInputField(password)) {
         alert('Missing input');
         return;
     }
 
     // Checks for a valid password/email
-    if (!passwordValidation(password, confirmPassword) || !emailValidation(email)) {
+    if (!passwordValidation(password) || !emailValidation(email)) {
         alert('Email/Password does not meet requirements');
         return;
     }
 
     // Submit actions after inputs have been validated
-    createUserWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
         .then(() => {
             // Ref to current user
             let user = auth.currentUser;
 
-            // User sign up data
+            // Data we want to update upon sign in: last login
             let userData = {
-                email: email,
-                username: username,
                 lastLogin: Date.now(),
             }
 
-            set(ref(database, 'users/' + user.uid), userData);
-            alert('User Created!');
+            // Push updates to database
+            update(ref(database, 'users/' + user.uid), userData);
+            alert('User Logged in!')
         })
         .catch((error) => {
-            console.log(error.code);
             alert(error.message);
+            console.log(error.code);
         })
 }
-
-
-const passwordValidation = (password, confirmPassword) => {
-    // Add password requirements here
-    if (confirmPassword != password) {
-        return false;
-    }
-
-    // Firebase requires > 6 chars
-    if (password.length < 6) {
-        return false;
-    }
-
-    // Password is good
-    return true;
-}
-
 
 const emailValidation = (email) => {
     const expression = /^[^@]+@\w+(\.\w+)+\w$/; // Regex tests if email input is in proper format
@@ -89,6 +68,15 @@ const emailValidation = (email) => {
     return true;
 }
 
+const passwordValidation = (password) => {
+    // Firebase requires > 6 chars
+    if (password.length < 6) {
+        return false;
+    }
+
+    // Password is good
+    return true;
+}
 
 const validateInputField = (field) => {
     // Checks if input field is empty
@@ -100,5 +88,5 @@ const validateInputField = (field) => {
 }
 
 
-const button = document.getElementById("submit")
-button.addEventListener("click", handleSignup)
+const button = document.getElementById("submit");
+button.addEventListener("click", handleSignin)
