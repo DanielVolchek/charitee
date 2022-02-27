@@ -125,10 +125,10 @@ const handleSubmit = (event => {
 const addObjectToDatabase = async (object) => {
     await setDoc(doc(database, "donations", object.id), object)
         .then(() => {
-            console.log("Sucessfully Uploaded")
+            alert("Sucessfully Uploaded");
         })
         .catch((error) => {
-            console.log(error.message);
+            alert(error.message);
             return;
         });
 }
