@@ -53,9 +53,12 @@ const handleSignup = () => {
                 lastLogin: Date.now(),
             }
 
-            const docRef = await addDoc(collection(database, 'users/' + user.uid + "/userData"), userData);
 
-            document.cookie = "session=" + user.uid + ';max-age=3600';
+            await addDoc(collection(database, 'users/' + user.uid + "/userData"), userData);
+            
+            document.cookie = "session=" + user.uid + ';path=/' + ';max-age=3600';
+            document.cookie = 'email=' + email + ";path=/" + ';max-age=3600';
+
             alert('User Created!');
 
             window.location.assign('../index.html')
