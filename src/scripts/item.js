@@ -35,12 +35,14 @@ const querySnapshot = await getDocs(q)
 
 
 let imgURLS = []
+let seller = ""
 let imgIterator = 0
 let displayImg = null
 querySnapshot.forEach(data => {
     const docData = data.data()
     console.log(docData)
     let first = true
+    seller = docData.account
     document.getElementById("title").innerText = docData.title
     for (const img of docData.images) {
         console.log(img)
@@ -72,7 +74,7 @@ querySnapshot.forEach(data => {
 })
 const backButton = document.getElementById("backButton")
 const frontButton = document.getElementById("frontButton")
-const buyButton = document.getElementById("items-container")
+const buyButton = document.getElementById("buy")
 const moveBackIMG = () => {
     if (!displayImg || imgIterator === 0 || !imgURLS[imgIterator - 1]) {
         return
@@ -92,10 +94,13 @@ const checkSignedIn = () => {
     }
     return false
 }
-const notifyBuyer = () => {
-    if (checkSignedIn())
-    const docRef = await addDoc(collection(db, 'users/' + + "/userData"), userData);
+const notifyBuyer = async() => {
+    if (checkSignedIn() && seller !== "") {
+        // const userEmail = 
+        const docRef = await addDoc(collection(db, 'users/' + seller + "/notifications"), );
+
+    }
 }
 backButton.addEventListener("click", moveBackIMG)
 frontButton.addEventListener("click", moveForwardIMG)
-buyButton.addEventListener("click",)
+buyButton.addEventListener("click", notifyBuyer)
