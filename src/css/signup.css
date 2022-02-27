@@ -1,3 +1,7 @@
+html *{
+    font-family: 'Asap Condensed', sans-serif;
+}
+
 body {
     overflow: hidden;
     background-image: url(../assets/img1.png);

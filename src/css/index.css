@@ -1,3 +1,8 @@
+html *{
+	font-family: 'Asap Condensed', sans-serif;
+}
+
+
 body {
 	margin: 0;
 	/* background-image: url("../assets/indexbg.jpg");
@@ -65,8 +70,7 @@ body {
 	position: relative;
 	top: 40px;
 	left: 60px;
-	font-family: 'Poppins', sans-serif;
-    font-family: 'Shrikhand', cursive;
+    font-family: 'Shrikhand', cursive !important;
 	color: rgb(12, 197, 12);
 	text-decoration: none;
 	font-size: 40px;

@@ -1,3 +1,7 @@
+html * {
+	font-family: 'Asap Condensed', sans-serif;
+}
+
 body {
 	background-color: white;
 	overflow: auto;
@@ -5,7 +9,6 @@ body {
 
 h1 {
 	font-family: 'Merriweather', serif;
-    font-family: 'Poppins', sans-serif;
 	margin-top: 50px;
 }
 
@@ -44,9 +47,32 @@ h1 {
 #searchForm{
 	display: inline;
 }
+
+#search {
+	margin: 15px 0;
+	width: 15vw;
+	height: 3vh;
+}
+
+#items-container {
+	display: flex;
+	width: 60vw;
+	height: 40vh;
+}
+
+
+.item {
+	margin: 10px;
+	width: 150px;
+	height: 150px;
+	cursor: pointer;
+	border: 2px solid black;
+}
+
 .fig{
 	text-align: center;
 }
+
 .item {
 	margin: 10px;
 	border-radius: 5px;
