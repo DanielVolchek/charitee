@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
-import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
-import { getFirestore, updateDoc, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
+import { getAuth, signInWithEmailAndPassword, setPersistence, inMemoryPersistence } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -38,12 +38,14 @@ const handleSignin = () => {
     }
 
     // Submit actions after inputs have been validated
+    setPersistence(auth, inMemoryPersistence);
+
     signInWithEmailAndPassword(auth, email, password)
         .then(async () => {
-            // Ref to current user
             let user = auth.currentUser;
-
-            alert('User Logged in!')
+            document.cookie = "session=" + user.uid + ';max-age=3600';
+            alert("User Logged In!")
+            console.log(document.cookie);
         })
         .catch((error) => {
             alert(error.message);
