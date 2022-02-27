@@ -41,6 +41,57 @@ const checkSignedIn = () => {
     return false
 }
 
+const setList = () => {
+    console.log("setting list")
+    const select = document.getElementById("charity")
+    console.log(select)
+    const data = [
+        "NAACP Legal Defense and Educational Fund",
+        "Elizabeth Glaser Pediatric AIDS Foundation",
+        "American Indian College Fund",
+        "Animal Welfare Institute",
+        "American Humane",
+        "Asia Foundation",
+        "Guide Dog Foundation for the Blind",
+        "Breast Cancer Research Foundation",
+        "National Center for Missing & Exploited Children",
+        "American Civil Liberties Union (ACLU)",
+        "Food and Water Watch",
+        "Partnership to End Addiction",
+        "African Wildlife Foundation",
+        "Water.org",
+        "charity: water",
+        "American Foundation for Suicide Prevention",
+        "American Bird Conservancy",
+        "American Brain Tumor Association     ",
+        "American Kidney Fund     ",
+        "American Liver Foundation ",
+        "American Lung Association",
+        "Diabetes Action Research and Education Foundation",
+        "Parkinson's Foundation",
+        "Hispanic Scholarship Fund",
+        "National Alliance to End Homelessness",
+        "American Red Cross",
+        "Action Against Hunger-USA",
+        "The Hunger Project",
+        "HIAS",
+        "Center for Reproductive Rights",
+    ]
+    for (let org of data){
+        const newOpt = document.createElement("option")
+        let newVal = ""
+        if (org !== "HIAS"){
+            newVal = org.substring(0, org.indexOf(" "))
+        }
+        else{
+            newVal = "HIAS"
+        }
+        newOpt.setAttribute("value", newVal)
+        newOpt.text = org
+        select.appendChild(newOpt)
+    }
+}
+setList()
 const submitForm = document.getElementById("signup-form")
 const handleSubmit = (event => {
     event.preventDefault()
@@ -86,7 +137,7 @@ const handleSubmit = (event => {
 
     // Get title
     const title = document.getElementById("title")
-    if (title.value > 15){
+    if (title.value > 15) {
         alert("Title must be under 15 characters long")
         return
     }
@@ -123,7 +174,7 @@ const handleSubmit = (event => {
     }
     // Check price greater than 0
     const price = document.getElementById("price")
-    if (price.value <= 0){
+    if (price.value <= 0) {
         alert("Price must be greater than 0")
         return
     }
@@ -143,7 +194,7 @@ const handleSubmit = (event => {
     json.images = imageURLs // todo
     json.account = accountId // todo
     json.charity = charity.value
-    json.price = price.value 
+    json.price = price.value
     // TODO 
     // Rename image with UUID gen
     // Upload image to firebase
