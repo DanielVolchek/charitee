@@ -1,16 +1,16 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
 import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
-import 
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
-
+console.log(ref)
 const firebaseConfig = {
     apiKey: "AIzaSyAT3OTmeuHnwXf7-I-PJ44RWuvYgi3WMlk",
     authDomain: "charitee-e8cba.firebaseapp.com",
     projectId: "charitee-e8cba",
-    storageBucket: "charitee-e8cba.appspot.com",
+    storageBucket: "gs://charitee-e8cba.appspot.com",
     messagingSenderId: "969486062473",
     appId: "1:969486062473:web:7c1fc88e5ca2c58d6b8758"
 };
@@ -44,7 +44,7 @@ const handleSubmit = (event => {
     const images = document.getElementById("images")
     const imageURLs = []
     // verify image extensions
-    for (let file of images.files) {
+    for (const file of images.files) {
         const fileName = file.name
         let lastDot = -1;
         for (let i = 0; i < fileName.length; i++) {
@@ -53,7 +53,7 @@ const handleSubmit = (event => {
             }
         }
         const fileExt = fileName.substring(lastDot, fileName.length)
-        if (lastDot === -1 || (fileExt !== ".jpg" && fileExt !== ".png")) {
+        if (lastDot === -1 || (fileExt !== ".jpg" && fileExt !== ".jpeg" && fileExt !== ".png")) {
             alert(`File ${fileName} must be of type JPG or PNG`)
             return
         }
@@ -102,7 +102,7 @@ const handleSubmit = (event => {
         alert("Please choose a charity from the dropdown menu")
         return
     }
-    uploadImagesToCloud(images)
+    uploadImagesToCloud(images.files)
     // create json object to send to firebase
     const json = {}
     json.id = UUID() // todo
@@ -126,13 +126,20 @@ const handleSubmit = (event => {
 })
 
 const uploadImagesToCloud = (imgs) => {
-    const cloud = database.storage.ref()
-    for (f of imgs) {
-        cloud.child(f.name).put(f).then((snapshot) => {
+    const cloud = getStorage()
+    console.log(cloud)
+    console.log(imgs)
+    for (const f of imgs) {
+        const imgRef = ref(cloud, ("images/" + f.name))
+        // const bytes = readIntoByteArray(f)
+        uploadBytes(imgRef, f).then((snapshot) => {
             console.log("Uploaded file")
+        }).catch((error) => {
+            alert(error.message)
         })
     }
 }
+
 const addObjectToDatabase = async (object) => {
     await setDoc(doc(database, "donations", object.id), object)
         .then(() => {
@@ -145,4 +152,35 @@ const addObjectToDatabase = async (object) => {
 }
 
 
+const readIntoByteArray = (file) => {
+    const reader = new FileReader();
+    const fileByteArray = [];
+    reader.readAsArrayBuffer(file)
+    reader.onloadend = () => {
+        if (evt.target.readyState == FileReader.DONE) {
+            const arrayBuffer = evt.target.result,
+                array = new Uint8Array(arrayBuffer);
+            for (let i = 0; i < array.length; i++) {
+                fileByteArray.push(array[i]);
+            }
+        }
+    }
+    return fileByteArray
+}
+/*
+var reader = new FileReader();
+var fileByteArray = [];
+reader.readAsArrayBuffer(myFile);
+reader.onloadend = function (evt) {
+    if (evt.target.readyState == FileReader.DONE) {
+       var arrayBuffer = evt.target.result,
+           array = new Uint8Array(arrayBuffer);
+       for (var i = 0; i < array.length; i++) {
+           fileByteArray.push(array[i]);
+        }
+    }
+}
+
+
+*/
 submitForm.addEventListener("submit", handleSubmit)
