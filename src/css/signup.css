@@ -1,5 +1,6 @@
 body {
     overflow: hidden;
+    background-color: #a9d6e5;
 }
 
 p {
@@ -21,7 +22,7 @@ p {
 
 .form {
     height: 70vh;
-    width: 85vw;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     margin: 15vh auto;

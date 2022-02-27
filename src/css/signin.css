@@ -1,5 +1,6 @@
 body {
     overflow: hidden;
+    background-color: #b7e4c7;
 }
 p {
     margin: auto;
@@ -19,11 +20,11 @@ p {
 
 .form {
     height: 70vh;
-    width: 85vw;
+    width: 80vw;
     display: flex;
     flex-direction: column;
     margin: 15vh auto;
-    background-color: #94d2bd;
+    background-color: #52b788;
 }
 
 #email {
