@@ -17,7 +17,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getFirestore();
-console.log(database)
 // get files
 // save files
 // Get parent dropdown menu (select)
@@ -38,6 +37,18 @@ const UUID = () =>
 const submitForm = document.getElementById("signup-form")
 const handleSubmit = (event => {
     event.preventDefault()
+
+    // First check if user is logged in
+    // Set the accountId of the JSON object for submission
+    let accountId = null;
+    if (document.cookie) {
+        accountId = document.cookie.split("=")[1];
+    }
+    else {
+        alert("User not logged in!")
+        return;
+    }
+
     // create variables for all form values
     const images = document.getElementById("images")
     const imageURLs = []
@@ -66,7 +77,7 @@ const handleSubmit = (event => {
     }
     // Get space seperated tag values
     const tags = document.getElementById("tags")
-    const tagArr = ["hello"]
+    const tagArr = []
     console.log("tagArr is " + tagArr)
     // Check value has at least one letter
     const letterCheck = /^[a-zA-Z]+$/g;
@@ -105,11 +116,10 @@ const handleSubmit = (event => {
     // create json object to send to firebase
     const json = {}
     json.id = UUID() // todo
-    console.log(json.id)
     json.desc = desc.value
     json.tags = tagArr
     json.images = imageURLs // todo
-    json.account = null // todo
+    json.account = accountId // todo
     json.charity = charity.value
     // Starting bid is 5 dollars
     json.bid = 5
