@@ -5,18 +5,23 @@ body {
 #items-container {
 	margin: auto;
 	display: flex;
-	width: 600px;
+	width: 620px;
 	height: 600px;
 	justify-content: start;
 	flex-wrap: wrap;
 	box-sizing: border-box;
 	border: 10px solid blue;
 	overflow-y: auto;
+	align-content: flex-start;
 }
 .upper-content {
 	margin: auto;
 	text-align: center;
 }
+.upper-content form{
+	display: inline;
+}
+
 .item {
 	margin: 10px;
 	width: 100px;

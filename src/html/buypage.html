@@ -13,8 +13,10 @@
 <body>
     <div class="upper-content">
         <h1>Buy and Donate</h1>
-        <input id="search" type="text">
-        <button id="searchButton">Search</button>
+        <form id="searchForm">
+            <input id="search" type="text" placeholder="Search Tags...">
+        </form>
+        <button id="searchButton" type="submit" form="searchForm">Search</button>
     </div>
     <div id="items-container">
         <!-- propogate with items via js -->
