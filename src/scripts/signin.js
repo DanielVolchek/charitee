@@ -43,7 +43,7 @@ const handleSignin = () => {
     signInWithEmailAndPassword(auth, email, password)
         .then(async () => {
             let user = auth.currentUser;
-            document.cookie = "session=" + user.uid + ';max-age=3600';
+            document.cookie = "session=" + user.uid + ';path=/;' + 'max-age=3600';
             alert("User Logged In!")
             window.location.assign('../index.html')
         })

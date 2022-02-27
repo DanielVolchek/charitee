@@ -44,6 +44,7 @@ h1 {
 #searchForm{
 	display: inline;
 }
+<<<<<<< HEAD
 
 #search {
 	margin: 15px 0;
@@ -64,4 +65,15 @@ h1 {
 	height: 150px;
 	cursor: pointer;
 	border: 2px solid black;	
+=======
+.fig{
+	text-align: center;
+}
+.item {
+	margin: 10px;
+	border-radius: 5px;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;	
+>>>>>>> f6fca7e020267c01eafaa670d54c88ae83872335
 }

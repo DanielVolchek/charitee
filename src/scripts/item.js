@@ -41,7 +41,7 @@ querySnapshot.forEach(data => {
     const docData = data.data()
     console.log(docData)
     let first = true
-
+    document.getElementById("title").innerText = docData.title
     for (const img of docData.images) {
         console.log(img)
         const pathRef = ref(imageStore, `gs://charitee-e8cba.appspot.com/images/${img}`)
@@ -64,7 +64,7 @@ querySnapshot.forEach(data => {
     desc.innerText=docData.desc
     content.appendChild(desc)
     const price = document.createElement("p")
-    price.innerText = `Price: ${docData.bid}$`
+    price.innerText = `Price: ${docData.price}$`
     content.appendChild(price)
     const charity = document.createElement("p")
     charity.innerText = `Supported Charity: ${docData.charity}`
