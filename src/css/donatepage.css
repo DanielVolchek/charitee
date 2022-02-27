@@ -1,7 +1,8 @@
 body {
-    margin-top: 4rem;
-    background-image: url(../assets/img3.png);
-    background-size: 100vw 100vh;
+	margin-top: 4rem;
+	/* background-image: url(../assets/img3.png); */
+	background-color: rgb(58, 60, 59);
+	background-size: 100vw 100vh;
 	display: flex;
 	flex-direction: row;
 }
@@ -9,16 +10,16 @@ h1 {
 	text-align: center;
 }
 
-.backbutton{
+.backbutton {
 	position: absolute;
 	top: 0;
-	left: 0;	
+	left: 0;
 	width: 20px;
 }
 
 #preview {
 	display: flex;
-	align-items: flex-start	;
+	align-items: flex-start;
 	flex-direction: column;
 	margin: auto;
 	justify-content: center;
@@ -28,7 +29,8 @@ h1 {
 	overflow-x: hidden;
 	row-gap: 0px;
 	background-color: white;
-	border: 1px black solid;
+	box-sizing: border-box;
+	border: 6px rgb(12, 197, 12) solid;
 	border-radius: 25px;
 }
 
@@ -42,24 +44,26 @@ h1 {
 	height: 80vh;
 	flex-direction: column;
 	justify-content: space-around;
-    border-radius: 4px;
+	border-radius: 4px;
 	align-items: center;
-    background-color: white;
-	border: 1px black solid;
+	background-color: white;
+	border: 6px rgb(12, 197, 12) solid;
 	border-radius: 25px;
+	overflow: auto;
 }
 
-.main-content textarea{
-    height: 8vh;
+.main-content textarea {
+	height: 8vh;
 	width: 16vw;
 }
 
-.main-content div{
+.main-content div {
 	display: flex;
 	flex-direction: column;
-    margin-top: 50px;
+	justify-content: flex-start;
+	margin-top: 50px;
 	margin-bottom: 50px;
-	align-items: center;
+	/* align-items: center; */
 }
 
 #images {
