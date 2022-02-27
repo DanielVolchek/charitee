@@ -1,6 +1,10 @@
+html *{
+    font-family: 'Asap Condensed', sans-serif;
+}
+
 body {
     overflow: hidden;
-    background-image: url(../assets/img2.jpg);
+    background-color: rgb(58, 60, 59);
     background-size: 100vw 100vh;
 }
 p {
@@ -26,7 +30,7 @@ p {
     display: flex;
     flex-direction: column;
     margin: 15vh auto;
-    background-color: rgb(66, 186, 250);
+    background-color: #48cae4;
     border: 1px black solid;
     border-radius: 25px;
 }
