@@ -45,7 +45,7 @@ const handleSignin = () => {
             let user = auth.currentUser;
             document.cookie = "session=" + user.uid + ';max-age=3600';
             alert("User Logged In!")
-            console.log(document.cookie);
+            window.location.assign('../index.html')
         })
         .catch((error) => {
             alert(error.message);
