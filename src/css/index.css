@@ -109,8 +109,11 @@ body {
 	text-decoration: none;
     border-radius: 25px;
     background-color:rgb(66, 186, 250);
+	transition: background-color 1s
 }
-
+.main-buttons a:hover{
+	background-color: lightblue;
+}
 .hide{
 	display: none;
 }
@@ -119,9 +122,14 @@ body {
 	position: relative;
 	right: 35px;
 	bottom: 40px;
-    min-width: 2.65vw;
-    min-height: 4.45vh;
+	width: 32px;
+	height: 32px;
     background-color: rgb(12, 197, 12);
 	border: 1px solid black;
     border-radius: 50%;
+	transition: background-color 0.5s
+}
+
+#notification-button:hover{
+	background-color: lightgreen;
 }
