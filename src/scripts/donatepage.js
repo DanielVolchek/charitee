@@ -8,18 +8,25 @@
 // cancel default action
 // create json object with desc, tags array, array of image urls
 
+// UUID generator
+//Source https://bit.ly/2neWfJ2 
+const UUID = () =>
+    ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
+    );
+
 const submitForm = document.getElementById("signup-form")
 const handleSubmit = (event => {
+    sessionStorage.setItem("test", "Hello")
     event.preventDefault()
     // create variables for all form values
-    const charity = document.getElementById("charity")
     const images = document.getElementById("images")
     // verify image extensions
-    for (file of images.files){
+    for (file of images.files) {
         const fileName = file.name
         let lastDot = -1;
-        for (let i = 0; i < fileName.length; i++){
-            if (fileName[i] === "."){
+        for (let i = 0; i < fileName.length; i++) {
+            if (fileName[i] === ".") {
                 lastDot = i
             }
         }
@@ -37,7 +44,8 @@ const handleSubmit = (event => {
     }
     // Get space seperated tag values
     const tags = document.getElementById("tags")
-    const tagArr = []
+    const tagArr = ["hello"]
+    console.log("tagArr is " + tagArr)
     // Check value has at least one letter
     const letterCheck = /^[a-zA-Z]+$/g;
     const tagVal = tags.value
@@ -45,27 +53,49 @@ const handleSubmit = (event => {
     for (let i = 0; i < tagVal.length; i++) {
         if (tagVal[i] === " ") {
             const add = tagVal.substring(lastWordIndex, i)
+            console.log(add)
             if (letterCheck.test(add)) {
-                tagArr[tagArr.length] = add
+                // regex bug only works every other check in loop
+                letterCheck.test(add)
+                console.log("tagArr is" + tagArr)
+                tagArr.push(add)
             }
             lastWordIndex = i + 1
         }
     }
+    console.log(tagVal.substring(lastWordIndex))
     const add = tagVal.substring(lastWordIndex)
     if (letterCheck.test(add)) {
-        tagArr[tagArr.length] = add
+        tagArr.push(add)
     }
+    console.log(tagArr)
     if (tagArr.length < 3) {
         alert("Must include at least 3 tags")
         return
     }
-    console.log(tagArr)
+    // check charity value is chosen
+    const charity = document.getElementById("charity")
+    if (charity.value === "dummy") {
+        alert("Please choose a charity from the dropdown menu")
+        return
+    }
     // create json object to send to firebase
     const json = {}
+    json.id = UUID() // todo
+    console.log(json.id)
     json.desc = desc.value
     json.tags = tagArr
     json.images = null // todo
-    json.account = null //todo
+    json.account = null // todo
     json.charity = charity.value
+    // Starting bid is 5 dollars
+    json.bid = 5
+    // Starting time is 3 days
+    json.secondsRemaining = 259200
+    // TODO 
+    // Rename image with UUID gen
+    // Upload image to firebase
+    // Set ID of post to UUID gen
+    // Upload json to firebase
 })
 submitForm.addEventListener("submit", handleSubmit)
