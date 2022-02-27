@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
 import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
+import 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -17,7 +18,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getFirestore();
-
+console.log(database)
 // get files
 // save files
 // Get parent dropdown menu (select)
@@ -41,6 +42,7 @@ const handleSubmit = (event => {
     event.preventDefault()
     // create variables for all form values
     const images = document.getElementById("images")
+    const imageURLs = []
     // verify image extensions
     for (let file of images.files) {
         const fileName = file.name
@@ -55,6 +57,7 @@ const handleSubmit = (event => {
             alert(`File ${fileName} must be of type JPG or PNG`)
             return
         }
+        imageURLs.push(fileName)
     }
     // check prereq values
     const desc = document.getElementById("desc")
@@ -99,13 +102,14 @@ const handleSubmit = (event => {
         alert("Please choose a charity from the dropdown menu")
         return
     }
+    uploadImagesToCloud(images)
     // create json object to send to firebase
     const json = {}
     json.id = UUID() // todo
     console.log(json.id)
     json.desc = desc.value
     json.tags = tagArr
-    json.images = null // todo
+    json.images = imageURLs // todo
     json.account = null // todo
     json.charity = charity.value
     // Starting bid is 5 dollars
@@ -121,7 +125,14 @@ const handleSubmit = (event => {
     addObjectToDatabase(json);
 })
 
-
+const uploadImagesToCloud = (imgs) => {
+    const cloud = database.storage.ref()
+    for (f of imgs) {
+        cloud.child(f.name).put(f).then((snapshot) => {
+            console.log("Uploaded file")
+        })
+    }
+}
 const addObjectToDatabase = async (object) => {
     await setDoc(doc(database, "donations", object.id), object)
         .then(() => {
