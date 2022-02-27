@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
-import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
+import { getFirestore, doc, setDoc , collection, query, where} from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
 import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -16,3 +16,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getFirestore();
+
+const donationRef= collection(db, "donations")
+
