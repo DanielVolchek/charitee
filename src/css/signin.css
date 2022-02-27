@@ -1,6 +1,7 @@
 body {
     overflow: hidden;
-    background-color: #b7e4c7;
+    background-image: url(../assets/img2.jpg);
+    background-size: 100vw 100vh;
 }
 p {
     margin: auto;
@@ -13,18 +14,21 @@ p {
     width: 15vw;
     background-color: white;
     border: 1px solid grey;
-    left: 18vw;
+    left: 42.5vw;
     top: 12.5vh;
     font-size: larger;
+
 }
 
 .form {
     height: 70vh;
-    width: 80vw;
+    width: 70vw;
     display: flex;
     flex-direction: column;
     margin: 15vh auto;
-    background-color: #52b788;
+    background-color: #48cae4;
+    border: 1px black solid;
+    border-radius: 25px;
 }
 
 #email {
@@ -34,6 +38,8 @@ p {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
+    border: 1px black solid;
+
 }
 
 #password {
@@ -43,6 +49,8 @@ p {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
+    border: 1px black solid;
+
 }
 
 #submit {
@@ -51,4 +59,6 @@ p {
     width: 7vw;
     border-radius: 10px;
     background-color: white;
+    border: 1px black solid;
+
 }

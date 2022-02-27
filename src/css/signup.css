@@ -1,6 +1,7 @@
 body {
     overflow: hidden;
-    background-color: #a9d6e5;
+    background-image: url(../assets/img1.png);
+    background-size: 100vw 100vh;
 }
 
 p {
@@ -15,18 +16,20 @@ p {
     width: 15vw;
     background-color: white;
     border: 1px solid grey;
-    left: 18vw;
+    left: 42.5vw;
     top: 12.5vh;
     font-size: larger;
 }
 
 .form {
     height: 70vh;
-    width: 80vw;
+    width: 70vw;
     display: flex;
     flex-direction: column;
     margin: 15vh auto;
-    background-color: #0096c7;
+    background-color: #74c69d;
+    border: 1px black solid;
+    border-radius: 25px;
 }
 
 #email {
@@ -36,6 +39,7 @@ p {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
+    border: 1px black solid;
 }
 
 #password {
@@ -45,6 +49,7 @@ p {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
+    border: 1px black solid;
 }
 
 #confirm-password {
@@ -54,6 +59,7 @@ p {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
+    border: 1px black solid;
 }
 
 #username {
@@ -63,6 +69,7 @@ p {
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
+    border: 1px black solid;
 }
 
 #submit {
@@ -71,4 +78,5 @@ p {
     width: 7vw;
     border-radius: 10px;
     background-color: white;
+    border: 1px black solid;
 }

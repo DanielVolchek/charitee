@@ -5,16 +5,17 @@ body {
 	overflow: hidden;
 }
 
-
 .account-links {
 	display: flex;
 	justify-content: end;
 	position: relative;
-	right: 15px;
-	top: 5px;
+	right: 35px;
+	top: 30px;
 }
 
-.login-link {
+.signup {
+	position: relative;
+	bottom: 40px;
 	font-size: 25px;
 	margin-top: 10px;
 	margin-right: 25px;
@@ -24,7 +25,23 @@ body {
 	transition: color 0.25s;
 }
 
-.login-link:hover {
+.signin {
+	position: relative;
+	bottom: 40px;
+	font-size: 25px;
+	margin-top: 10px;
+	margin-right: 25px;
+	text-decoration: none;
+	font-size: 20px;
+	color: white;
+	transition: color 0.25s;
+}
+
+.signin:hover {
+	color: rgb(66, 186, 250);
+}
+
+.signup:hover {
 	color: rgb(66, 186, 250);
 }
 
@@ -32,14 +49,28 @@ body {
 	position: absolute;
 	z-index: -1;
 	width: 100vw;
-	
 }
+
 .main-content {
-	margin-top: 20px;
+	margin-top: 25vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+}
+
+.logo {
+	display: flex;
+	justify-content: start;
+	position: relative;
+	top: 40px;
+	left: 60px;
+	font-family: 'Poppins', sans-serif;
+    font-family: 'Shrikhand', cursive;
+	color: rgb(12, 197, 12);
+	text-decoration: none;
+	font-size: 40px;
+
 }
 
 #header {
