@@ -34,6 +34,13 @@ const UUID = () =>
         (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
     );
 
+const checkSignedIn = () => {
+    if (document.cookie.split(';').some((item) => item.includes('session='))) {
+        return true
+    }
+    return false
+}
+
 const submitForm = document.getElementById("signup-form")
 const handleSubmit = (event => {
     event.preventDefault()
@@ -41,7 +48,7 @@ const handleSubmit = (event => {
     // First check if user is logged in
     // Set the accountId of the JSON object for submission
     let accountId = null;
-    if (document.cookie.includes("session=")) {
+    if (checkSignedIn()) {
         accountId = document.cookie.split("=")[1];
         console.log(accountId)
     }
