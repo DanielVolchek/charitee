@@ -59,13 +59,19 @@ const queryLoop = (querySnap => {
             }
             console.log(addValue)
             if (addValue) {
+                const newFig = document.createElement('figure')
+                const newFigCap = document.createElement('figcaption')
+                newFigCap.innerText = docData.title
+                newFigCap.setAttribute('class', 'fig')
                 const newPost = document.createElement('img')
                 newPost.addEventListener("click", (event) => {
                     window.location.href = `${subURL}item.html?id=${docData.id}`
                 })
                 newPost.setAttribute('src', url)
                 newPost.setAttribute('class', 'item')
-                postContainer.appendChild(newPost)
+                newFig.appendChild(newPost)
+                newFig.appendChild(newFigCap)
+                postContainer.appendChild(newFig)
             }
         })
     });

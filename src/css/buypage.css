@@ -21,9 +21,12 @@ body {
 .upper-content form{
 	display: inline;
 }
-
+.fig{
+	text-align: center;
+}
 .item {
 	margin: 10px;
+	border-radius: 5px;
 	width: 100px;
 	height: 100px;
 	cursor: pointer;	

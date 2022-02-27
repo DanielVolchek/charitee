@@ -41,8 +41,9 @@ const handleSubmit = (event => {
     // First check if user is logged in
     // Set the accountId of the JSON object for submission
     let accountId = null;
-    if (document.cookie) {
+    if (document.cookie.includes("session=")) {
         accountId = document.cookie.split("=")[1];
+        console.log(accountId)
     }
     else {
         alert("User not logged in!")
@@ -75,6 +76,13 @@ const handleSubmit = (event => {
         alert("Description must be at least 15 characters long")
         return
     }
+
+    // Get title
+    const title = document.getElementById("title")
+    if (title.value > 15){
+        alert("Title must be under 15 characters long")
+        return
+    }
     // Get space seperated tag values
     const tags = document.getElementById("tags")
     const tagArr = []
@@ -102,8 +110,14 @@ const handleSubmit = (event => {
         tagArr.push(add)
     }
     console.log(tagArr)
-    if (tagArr.length < 3) {
-        alert("Must include at least 3 tags")
+    if (tagArr.length == 0) {
+        alert("Must include at least 1 tag")
+        return
+    }
+    // Check price greater than 0
+    const price = document.getElementById("price")
+    if (price.value <= 0){
+        alert("Price must be greater than 0")
         return
     }
     // check charity value is chosen
@@ -116,15 +130,13 @@ const handleSubmit = (event => {
     // create json object to send to firebase
     const json = {}
     json.id = UUID() // todo
+    json.title = title.value
     json.desc = desc.value
     json.tags = tagArr
     json.images = imageURLs // todo
     json.account = accountId // todo
     json.charity = charity.value
-    // Starting bid is 5 dollars
-    json.bid = 5
-    // Starting time is 3 days
-    json.secondsRemaining = 259200
+    json.price = price.value 
     // TODO 
     // Rename image with UUID gen
     // Upload image to firebase
