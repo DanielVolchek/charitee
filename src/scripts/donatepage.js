@@ -77,13 +77,13 @@ const setList = () => {
         "HIAS",
         "Center for Reproductive Rights",
     ]
-    for (let org of data){
+    for (let org of data) {
         const newOpt = document.createElement("option")
         let newVal = ""
-        if (org !== "HIAS"){
+        if (org !== "HIAS") {
             newVal = org.substring(0, org.indexOf(" "))
         }
-        else{
+        else {
             newVal = "HIAS"
         }
         newOpt.setAttribute("value", newVal)
@@ -99,9 +99,20 @@ const handleSubmit = (event => {
     // First check if user is logged in
     // Set the accountId of the JSON object for submission
     let accountId = null;
-    if (checkSignedIn()) {
-        accountId = document.cookie.split("=")[1];
-        console.log(accountId)
+    const checkSignedIn = () => {
+        let lastItem = null
+        if (document.cookie.split(';').some((item) => {
+            lastItem = item
+            return item.includes('session=')
+        })) {
+            userID = lastItem.substring(8)
+            return userID 
+        }
+        return false
+    }
+    let accountId = checkSigned()
+    if (accountId){
+
     }
     else {
         alert("User not logged in!")

@@ -33,6 +33,7 @@ body {
     right: 50vw;
     min-width: 20vw;
     min-height: 20vh;
-    background-color: green;
+    
+    background-color: rgb();
     border-radius: 50%;
 }

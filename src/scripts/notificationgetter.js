@@ -39,7 +39,10 @@ querySnap.forEach((doc) => {
     const div = document.getElementById("notifications")
     console.log(docData)
     let newNotif = document.createElement("p")
-    newNotif.innerText = `Email: ${docData.userEmail}`
+    newNotif.innerText = `Email: ${docData.userEmail}    `
+    let title = document.createElement("p")
+    title.innerText = `${docData.title}`
+    div.appendChild(tile)
     div.appendChild(newNotif)
 
 })

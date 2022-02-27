@@ -54,12 +54,14 @@ let imgURLS = []
 let seller = ""
 let imgIterator = 0
 let displayImg = null
+let title = null
 querySnapshot.forEach(data => {
     const docData = data.data()
     console.log(docData)
     let first = true
     seller = docData.account
     document.getElementById("title").innerText = docData.title
+    title = docData.title
     for (const img of docData.images) {
         console.log(img)
         const pathRef = ref(imageStore, `gs://charitee-e8cba.appspot.com/images/${img}`)
@@ -119,7 +121,7 @@ const notifyBuyer = async () => {
     if (checkSignedIn() && seller !== "") {
         // const userEmail = 
         let data = {
-            userID,
+            title,
             userEmail: getEmailCookie()
         }
         console.log(seller)
