@@ -7,17 +7,19 @@ body {
 	display: flex;
 	width: 600px;
 	height: 600px;
-	justify-content: center;
-	align-items: center;
+	justify-content: start;
 	flex-wrap: wrap;
 	box-sizing: border-box;
 	border: 10px solid blue;
+	overflow-y: auto;
 }
 .upper-content {
 	margin: auto;
 	text-align: center;
 }
 .item {
+	margin: 10px;
 	width: 100px;
 	height: 100px;
+	cursor: pointer;	
 }
