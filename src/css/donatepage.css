@@ -1,6 +1,7 @@
 body {
     margin-top: 4rem;
-    background-color: rgb(66, 186, 250);
+    background-image: url(../assets/img3.png);
+    background-size: 100vw 100vh;
 	display: flex;
 	flex-direction: row;
 }
@@ -27,6 +28,8 @@ h1 {
 	overflow-x: hidden;
 	row-gap: 0px;
 	background-color: white;
+	border: 1px black solid;
+	border-radius: 25px;
 }
 
 .main-content {
@@ -42,6 +45,8 @@ h1 {
     border-radius: 4px;
 	align-items: center;
     background-color: white;
+	border: 1px black solid;
+	border-radius: 25px;
 }
 
 .main-content textarea{
