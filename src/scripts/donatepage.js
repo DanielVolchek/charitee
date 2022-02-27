@@ -5,7 +5,6 @@ import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
-console.log(ref)
 const firebaseConfig = {
     apiKey: "AIzaSyAT3OTmeuHnwXf7-I-PJ44RWuvYgi3WMlk",
     authDomain: "charitee-e8cba.firebaseapp.com",
@@ -38,7 +37,6 @@ const UUID = () =>
 
 const submitForm = document.getElementById("signup-form")
 const handleSubmit = (event => {
-    sessionStorage.setItem("test", "Hello")
     event.preventDefault()
     // create variables for all form values
     const images = document.getElementById("images")
@@ -57,7 +55,8 @@ const handleSubmit = (event => {
             alert(`File ${fileName} must be of type JPG or PNG`)
             return
         }
-        imageURLs.push(fileName)
+        const newName = UUID() + fileExt
+        imageURLs.push(newName)
     }
     // check prereq values
     const desc = document.getElementById("desc")
@@ -102,7 +101,7 @@ const handleSubmit = (event => {
         alert("Please choose a charity from the dropdown menu")
         return
     }
-    uploadImagesToCloud(images.files)
+    uploadImagesToCloud(images.files, imageURLs)
     // create json object to send to firebase
     const json = {}
     json.id = UUID() // todo
@@ -125,14 +124,14 @@ const handleSubmit = (event => {
     addObjectToDatabase(json);
 })
 
-const uploadImagesToCloud = (imgs) => {
+const uploadImagesToCloud = (imgs, names) => {
     const cloud = getStorage()
     console.log(cloud)
     console.log(imgs)
-    for (const f of imgs) {
-        const imgRef = ref(cloud, ("images/" + f.name))
+    for (let i = 0; i < imgs.length; i++) {
+        const imgRef = ref(cloud, ("images/" + names[i]))
         // const bytes = readIntoByteArray(f)
-        uploadBytes(imgRef, f).then((snapshot) => {
+        uploadBytes(imgRef, imgs[i]).then((snapshot) => {
             console.log("Uploaded file")
         }).catch((error) => {
             alert(error.message)
@@ -152,21 +151,22 @@ const addObjectToDatabase = async (object) => {
 }
 
 
-const readIntoByteArray = (file) => {
-    const reader = new FileReader();
-    const fileByteArray = [];
-    reader.readAsArrayBuffer(file)
-    reader.onloadend = () => {
-        if (evt.target.readyState == FileReader.DONE) {
-            const arrayBuffer = evt.target.result,
-                array = new Uint8Array(arrayBuffer);
-            for (let i = 0; i < array.length; i++) {
-                fileByteArray.push(array[i]);
-            }
-        }
-    }
-    return fileByteArray
-}
+// const readIntoByteArray = (file) => {
+//     const reader = new FileReader();
+//     const fileByteArray = [];
+//     reader.readAsArrayBuffer(file)
+//     reader.onloadend = () => {
+//         if (evt.target.readyState == FileReader.DONE) {
+//             const arrayBuffer = evt.target.result,
+//                 array = new Uint8Array(arrayBuffer);
+//             for (let i = 0; i < array.length; i++) {
+//                 fileByteArray.push(array[i]);
+//             }
+//         }
+//     }
+//     return fileByteArray
+// }
+
 /*
 var reader = new FileReader();
 var fileByteArray = [];
