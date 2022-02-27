@@ -54,7 +54,11 @@ const handleSignup = () => {
             }
 
             const docRef = await addDoc(collection(database, 'users/' + user.uid + "/userData"), userData);
+
+            document.cookie = "session=" + user.uid + ';max-age=3600';
             alert('User Created!');
+
+            window.location.assign('../index.html')
         })
         .catch((error) => {
             console.log(error.code);
