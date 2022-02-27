@@ -33,44 +33,57 @@ console.log(ID)
 const q = query(data, where("id", "==", ID))
 const querySnapshot = await getDocs(q)
 
-const backButton = document.getElementById("backButton")
-const frontButton = document.getElementById("frontButton")
-const moveBackIMG = () => {
-    if (!img || imgIterator === 0) {
-        return
-    }
-    img.setAttribute('src', imgURLS[imgIterator--])
-}
-const moveForwardIMG = () => {
-    if (!img || imgIterator === imgURLS.length) {
-        return
-    }
-    img.setAttribute('src', imgURLS[imgIterator++])
-}
 
-backButton.addEventListener("click", moveBackIMG)
-frontButton.addEventListener("click", moveForwardIMG)
-
-const imgURLS = []
+let imgURLS = []
 let imgIterator = 0
-let img = null
+let displayImg = null
 querySnapshot.forEach(data => {
     const docData = data.data()
     console.log(docData)
     let first = true
+
     for (const img of docData.images) {
         console.log(img)
         const pathRef = ref(imageStore, `gs://charitee-e8cba.appspot.com/images/${img}`)
         getDownloadURL(pathRef).then(url => {
             if (first) {
-                img = document.createElement("img")
-                img.setAttribute('src', url)
-                img.setAttribute('class', "images")
-                backButton.parentNode.insertBefore(img, backButton.nextSibling)
+                displayImg = document.createElement("img")
+                displayImg.setAttribute('src', url)
+                displayImg.setAttribute('class', "images")
+                backButton.parentNode.insertBefore(displayImg, backButton.nextSibling)
                 first = false
             }
+            console.log("img url ", url)
             imgURLS.push(url)
+            console.log(imgURLS)
         })
-
     }
+    const content = document.getElementById("content")
+    const desc = document.createElement("p")
+    desc.setAttribute("class", 'desc')
+    desc.innerText=docData.desc
+    content.appendChild(desc)
+    const price = document.createElement("p")
+    price.innerText = `Price: ${docData.bid}$`
+    content.appendChild(price)
+    const charity = document.createElement("p")
+    charity.innerText = `Supported Charity: ${docData.charity}`
+    content.appendChild(charity)
 })
+const backButton = document.getElementById("backButton")
+const frontButton = document.getElementById("frontButton")
+const moveBackIMG = () => {
+    if (!displayImg || imgIterator === 0 || !imgURLS[imgIterator-1]) {
+        return
+    }
+    displayImg.setAttribute('src', imgURLS[imgIterator--])
+}
+const moveForwardIMG = () => {
+    if (!displayImg || imgIterator === imgURLS.length || !imgURLS[imgIterator+1]) {
+        return
+    }
+    displayImg.setAttribute('src', imgURLS[imgIterator++])
+}
+
+backButton.addEventListener("click", moveBackIMG)
+frontButton.addEventListener("click", moveForwardIMG)
