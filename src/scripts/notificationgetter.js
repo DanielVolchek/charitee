@@ -42,7 +42,7 @@ querySnap.forEach((doc) => {
     newNotif.innerText = `Email: ${docData.userEmail}    `
     let title = document.createElement("p")
     title.innerText = `${docData.title}`
-    div.appendChild(tile)
+    div.appendChild(title)
     div.appendChild(newNotif)
 
 })

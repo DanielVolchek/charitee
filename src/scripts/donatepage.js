@@ -98,19 +98,18 @@ const handleSubmit = (event => {
 
     // First check if user is logged in
     // Set the accountId of the JSON object for submission
-    let accountId = null;
     const checkSignedIn = () => {
         let lastItem = null
         if (document.cookie.split(';').some((item) => {
             lastItem = item
             return item.includes('session=')
         })) {
-            userID = lastItem.substring(8)
+            let userID = lastItem.substring(8)
             return userID 
         }
         return false
     }
-    let accountId = checkSigned()
+    let accountId = checkSignedIn()
     if (accountId){
 
     }
