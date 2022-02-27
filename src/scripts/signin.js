@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
-import { getDatabase, update, ref } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js';
+import { getFirestore, updateDoc, doc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -18,7 +18,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const database = getDatabase();
+const database = getFirestore();
 
 
 const handleSignin = () => {
@@ -39,17 +39,10 @@ const handleSignin = () => {
 
     // Submit actions after inputs have been validated
     signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then(async () => {
             // Ref to current user
             let user = auth.currentUser;
 
-            // Data we want to update upon sign in: last login
-            let userData = {
-                lastLogin: Date.now(),
-            }
-
-            // Push updates to database
-            update(ref(database, 'users/' + user.uid), userData);
             alert('User Logged in!')
         })
         .catch((error) => {

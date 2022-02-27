@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js';
-import { getDatabase, set, ref } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js';
+import { getFirestore, addDoc, collection } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -18,7 +18,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
-const database = getDatabase();
+const database = getFirestore();
 
 
 const handleSignup = () => {
@@ -42,7 +42,7 @@ const handleSignup = () => {
 
     // Submit actions after inputs have been validated
     createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then(async () => {
             // Ref to current user
             let user = auth.currentUser;
 
@@ -53,7 +53,7 @@ const handleSignup = () => {
                 lastLogin: Date.now(),
             }
 
-            set(ref(database, 'users/' + user.uid), userData);
+            const docRef = await addDoc(collection(database, 'users/' + user.uid + "/userData"), userData);
             alert('User Created!');
         })
         .catch((error) => {
