@@ -108,4 +108,5 @@ const modifySearch = (event) => {
     queryLoop(querySnapshot)
 }
 
+
 document.getElementById("searchForm").addEventListener("submit", modifySearch)

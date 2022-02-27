@@ -44,28 +44,6 @@ h1 {
 #searchForm{
 	display: inline;
 }
-<<<<<<< HEAD
-
-#search {
-	margin: 15px 0;
-	width: 15vw;
-	height: 3vh;
-}
-
-#items-container {
-	display: flex;
-	width: 60vw;
-	height: 40vh;
-}
-
-
-.item {
-	margin: 10px;
-	width: 150px;
-	height: 150px;
-	cursor: pointer;
-	border: 2px solid black;	
-=======
 .fig{
 	text-align: center;
 }
@@ -75,5 +53,4 @@ h1 {
 	width: 100px;
 	height: 100px;
 	cursor: pointer;	
->>>>>>> f6fca7e020267c01eafaa670d54c88ae83872335
 }

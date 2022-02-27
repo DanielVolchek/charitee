@@ -61,7 +61,7 @@ querySnapshot.forEach(data => {
     const content = document.getElementById("content")
     const desc = document.createElement("p")
     desc.setAttribute("class", 'desc')
-    desc.innerText=docData.desc
+    desc.innerText = docData.desc
     content.appendChild(desc)
     const price = document.createElement("p")
     price.innerText = `Price: ${docData.price}$`
@@ -72,18 +72,30 @@ querySnapshot.forEach(data => {
 })
 const backButton = document.getElementById("backButton")
 const frontButton = document.getElementById("frontButton")
+const buyButton = document.getElementById("items-container")
 const moveBackIMG = () => {
-    if (!displayImg || imgIterator === 0 || !imgURLS[imgIterator-1]) {
+    if (!displayImg || imgIterator === 0 || !imgURLS[imgIterator - 1]) {
         return
     }
     displayImg.setAttribute('src', imgURLS[imgIterator--])
 }
 const moveForwardIMG = () => {
-    if (!displayImg || imgIterator === imgURLS.length || !imgURLS[imgIterator+1]) {
+    if (!displayImg || imgIterator === imgURLS.length || !imgURLS[imgIterator + 1]) {
         return
     }
     displayImg.setAttribute('src', imgURLS[imgIterator++])
 }
 
+const checkSignedIn = () => {
+    if (document.cookie.split(';').some((item) => item.includes('session='))) {
+        return true
+    }
+    return false
+}
+const notifyBuyer = () => {
+    if (checkSignedIn())
+    const docRef = await addDoc(collection(db, 'users/' + + "/userData"), userData);
+}
 backButton.addEventListener("click", moveBackIMG)
 frontButton.addEventListener("click", moveForwardIMG)
+buyButton.addEventListener("click",)
