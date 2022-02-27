@@ -27,3 +27,12 @@ body {
     width: 250px;
     height: 260px;
 }
+
+#notification-button {
+    position: relative;
+    right: 50vw;
+    min-width: 20vw;
+    min-height: 20vh;
+    background-color: green;
+    border-radius: 50%;
+}

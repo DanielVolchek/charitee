@@ -114,3 +114,14 @@ body {
 .hide{
 	display: none;
 }
+
+#notification-button {
+	position: relative;
+	right: 35px;
+	bottom: 40px;
+    min-width: 2.65vw;
+    min-height: 4.45vh;
+    background-color: rgb(12, 197, 12);
+	border: 1px solid black;
+    border-radius: 50%;
+}
