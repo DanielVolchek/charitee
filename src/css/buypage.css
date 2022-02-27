@@ -1,0 +1,23 @@
+body {
+	background-color: rgb(66, 186, 250);
+}
+
+#items-container {
+	margin: auto;
+	display: flex;
+	width: 600px;
+	height: 600px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	border: 10px solid blue;
+}
+.upper-content {
+	margin: auto;
+	text-align: center;
+}
+.item {
+	width: 100px;
+	height: 100px;
+}

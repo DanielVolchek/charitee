@@ -1,15 +1,15 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
 import { getFirestore, doc, setDoc } from 'https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js';
+import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-storage.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
-
 const firebaseConfig = {
     apiKey: "AIzaSyAT3OTmeuHnwXf7-I-PJ44RWuvYgi3WMlk",
     authDomain: "charitee-e8cba.firebaseapp.com",
     projectId: "charitee-e8cba",
-    storageBucket: "charitee-e8cba.appspot.com",
+    storageBucket: "gs://charitee-e8cba.appspot.com",
     messagingSenderId: "969486062473",
     appId: "1:969486062473:web:7c1fc88e5ca2c58d6b8758"
 };
@@ -17,7 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getFirestore();
-
+console.log(database)
 // get files
 // save files
 // Get parent dropdown menu (select)
@@ -37,12 +37,12 @@ const UUID = () =>
 
 const submitForm = document.getElementById("signup-form")
 const handleSubmit = (event => {
-    sessionStorage.setItem("test", "Hello")
     event.preventDefault()
     // create variables for all form values
     const images = document.getElementById("images")
+    const imageURLs = []
     // verify image extensions
-    for (let file of images.files) {
+    for (const file of images.files) {
         const fileName = file.name
         let lastDot = -1;
         for (let i = 0; i < fileName.length; i++) {
@@ -51,10 +51,12 @@ const handleSubmit = (event => {
             }
         }
         const fileExt = fileName.substring(lastDot, fileName.length)
-        if (lastDot === -1 || (fileExt !== ".jpg" && fileExt !== ".png")) {
+        if (lastDot === -1 || (fileExt !== ".jpg" && fileExt !== ".jpeg" && fileExt !== ".png")) {
             alert(`File ${fileName} must be of type JPG or PNG`)
             return
         }
+        const newName = UUID() + fileExt
+        imageURLs.push(newName)
     }
     // check prereq values
     const desc = document.getElementById("desc")
@@ -99,13 +101,14 @@ const handleSubmit = (event => {
         alert("Please choose a charity from the dropdown menu")
         return
     }
+    uploadImagesToCloud(images.files, imageURLs)
     // create json object to send to firebase
     const json = {}
     json.id = UUID() // todo
     console.log(json.id)
     json.desc = desc.value
     json.tags = tagArr
-    json.images = null // todo
+    json.images = imageURLs // todo
     json.account = null // todo
     json.charity = charity.value
     // Starting bid is 5 dollars
@@ -121,6 +124,20 @@ const handleSubmit = (event => {
     addObjectToDatabase(json);
 })
 
+const uploadImagesToCloud = (imgs, names) => {
+    const cloud = getStorage()
+    console.log(cloud)
+    console.log(imgs)
+    for (let i = 0; i < imgs.length; i++) {
+        const imgRef = ref(cloud, ("images/" + names[i]))
+        // const bytes = readIntoByteArray(f)
+        uploadBytes(imgRef, imgs[i]).then((snapshot) => {
+            console.log("Uploaded file")
+        }).catch((error) => {
+            alert(error.message)
+        })
+    }
+}
 
 const addObjectToDatabase = async (object) => {
     await setDoc(doc(database, "donations", object.id), object)
@@ -134,4 +151,36 @@ const addObjectToDatabase = async (object) => {
 }
 
 
+// const readIntoByteArray = (file) => {
+//     const reader = new FileReader();
+//     const fileByteArray = [];
+//     reader.readAsArrayBuffer(file)
+//     reader.onloadend = () => {
+//         if (evt.target.readyState == FileReader.DONE) {
+//             const arrayBuffer = evt.target.result,
+//                 array = new Uint8Array(arrayBuffer);
+//             for (let i = 0; i < array.length; i++) {
+//                 fileByteArray.push(array[i]);
+//             }
+//         }
+//     }
+//     return fileByteArray
+// }
+
+/*
+var reader = new FileReader();
+var fileByteArray = [];
+reader.readAsArrayBuffer(myFile);
+reader.onloadend = function (evt) {
+    if (evt.target.readyState == FileReader.DONE) {
+       var arrayBuffer = evt.target.result,
+           array = new Uint8Array(arrayBuffer);
+       for (var i = 0; i < array.length; i++) {
+           fileByteArray.push(array[i]);
+        }
+    }
+}
+
+
+*/
 submitForm.addEventListener("submit", handleSubmit)
